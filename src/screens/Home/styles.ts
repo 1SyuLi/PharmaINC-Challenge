@@ -12,6 +12,7 @@ export const Header = styled.View`
    align-items: center;
    justify-content: center;
    margin-top: 20px;
+   margin-bottom: 20px;
 `;
 
 export const Title = styled.Text`
@@ -41,5 +42,6 @@ export const FilterIcon = styled(Feather)`
 
 export const CardWrapper = styled.View`
    padding: 10px 24px;
-   margin-top: 24px;
+   margin-top: 10px;
+   padding-bottom: 64px;
 `;

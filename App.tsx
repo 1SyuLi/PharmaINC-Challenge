@@ -12,6 +12,9 @@ import theme from './src/global/theme/theme';
 
 import { Home } from './src/screens/Home';
 
+import { NavigationContainer } from "@react-navigation/native";
+import { TabRoutes } from './src/routes/tab.routes';
+
 export default function App() {
   const [fontsLoaded] = useFonts({
     Roboto_400Regular,
@@ -24,7 +27,9 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Home />
+      <NavigationContainer>
+        <TabRoutes />
+      </NavigationContainer>
     </ThemeProvider>
   );
 }

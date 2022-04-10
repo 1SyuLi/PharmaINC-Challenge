@@ -1,12 +1,14 @@
-import React from 'react';
-import { FlatList } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, ScrollView } from 'react-native';
 
 import { StatusBar } from 'react-native';
 import { useTheme } from 'styled-components';
 
-
 import { SearchInput } from '../../components/SearchInput';
 import { UserCard } from '../../components/UserCard';
+import { LoadMore } from '../../components/LoadMore';
+
+import { api } from '../../services/api';
 
 import {
    Container,
@@ -18,37 +20,64 @@ import {
    CardWrapper,
 } from './styles';
 
+type UserProps = {
+   id: string,
+   email: string,
+   gender: string,
+   phone: string,
+   name: string,
+   userPhoto: string,
+   dateBirth: string,
+}
+
 export function Home() {
 
    const theme = useTheme();
 
-   const user = [
-      {
-         id: '1',
-         photoUrl: 'https://github.com/1syuli.png',
-         name: 'Ruan Pablo',
-         email: 'ruangoio01@gmail.com',
-         phone: '+55 (11) 99999-9999',
-         gender: 'man',
-         dateBirth: '18/08/2004'
-      },
-      {
-         id: '2',
-         photoUrl: 'https://randomuser.me/api/portraits/women/23.jpg',
-         name: 'Terra Terry',
-         email: 'terra.terry@example.com',
-         phone: '+55 (11) 99999-9999',
-         gender: 'woman',
-         dateBirth: '12/03/1951'
-      },
-   ]
+   const [users, setUsers] = useState<UserProps[]>([]);
+   const [defaultUsers, setDefaultUsers] = useState(true);
+
+   async function loadUsers() {
+      await api.get('/?results=2').then(response => {
+
+         const apiData = response.data.results;
+
+
+         apiData.map(user => {
+            const userFormatted: UserProps = {
+               id: user.login.uuid,
+               email: user.email,
+               gender: user.gender,
+               phone: user.phone,
+               name: user.name.first,
+               userPhoto: user.picture.large,
+               dateBirth: '00/00/2000',
+            }
+
+            setUsers((oldUsers: any) => [...oldUsers, userFormatted]);
+         });
+      }).catch(err => {
+         console.log(err);
+      })
+   }
+
+
+   useEffect(() => {
+      async function loadDefaultUsers() {
+         if (defaultUsers) {
+            loadUsers();
+            setDefaultUsers(false);
+         }
+      }
+      loadDefaultUsers();
+   }, [])
 
    return (
       <Container>
          <StatusBar barStyle='dark-content' backgroundColor={theme.colors.background} />
 
          <Header>
-            <Title>Pharm <Detail>INC</Detail></Title>
+            <Title>Pharma <Detail>INC</Detail></Title>
 
             <InputWrapper>
                <SearchInput />
@@ -56,16 +85,15 @@ export function Home() {
             </InputWrapper>
          </Header>
 
-         <CardWrapper>
-            <FlatList
-               data={user}
-               keyExtractor={item => item.id}
-               renderItem={({ item }) => <UserCard user={item} />}
-               showsVerticalScrollIndicator={false}
-            />
+         <ScrollView>
+            <CardWrapper>
+               {users.map(user => <UserCard key={user.id} user={user} />)}
+
+               <LoadMore onPress={loadUsers} />
+            </CardWrapper>
+         </ScrollView>
 
 
-         </CardWrapper>
       </Container>
    );
 }

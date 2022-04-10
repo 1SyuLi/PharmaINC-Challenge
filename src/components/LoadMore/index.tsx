@@ -1,4 +1,5 @@
 import React from 'react';
+import { TouchableOpacityProps } from 'react-native';
 
 import {
     Container,
@@ -6,11 +7,13 @@ import {
     LoadMoreText,
 } from './styles';
 
-export function LoadMore() {
+interface LoadMoreProps extends TouchableOpacityProps { }
+
+export function LoadMore({ ...rest }: LoadMoreProps) {
     return (
-        <Container>
+        <Container {...rest}>
             <LoadIcon name="rotate-cw" />
-            <LoadMoreText>Loading More...</LoadMoreText>
+            <LoadMoreText>Load More</LoadMoreText>
         </Container>
     );
 }

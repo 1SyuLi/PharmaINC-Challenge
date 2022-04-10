@@ -16,7 +16,7 @@ import {
 interface UserProps {
     user: {
         id: string;
-        photoUrl: string;
+        userPhoto: string;
         phone: string;
         name: string;
         email: string;
@@ -29,7 +29,7 @@ export function UserCard({ user }: UserProps) {
     return (
         <Container>
             <Content>
-                <Avatar source={{ uri: user.photoUrl }} />
+                <Avatar source={{ uri: user.userPhoto }} />
                 <UserInfo>
                     <UserName>{user.name}</UserName>
                     <UserEmail>{user.email}</UserEmail>
