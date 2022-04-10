@@ -3,6 +3,10 @@
     "name": "PharmaInc",
     "slug": "PharmaInc",
     "version": "1.0.0",
+    "splash": {
+      "image": "./assets/splashScreen.png",
+      "backgroundColor": "#CEDBE3"
+    },
     "assetBundlePatterns": [
       "**/*"
     ]
