@@ -1,6 +1,6 @@
+import styled from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
-import styled from 'styled-components/native'
 
 export const Container = styled.View`
    flex: 1;
@@ -37,4 +37,9 @@ export const FilterIcon = styled(Feather)`
    font-size: 24px;
    color: ${({ theme }) => theme.colors.secondary};
    margin-right: 20px;
+`;
+
+export const CardWrapper = styled.View`
+   padding: 10px 24px;
+   margin-top: 24px;
 `;

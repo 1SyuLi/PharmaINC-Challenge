@@ -11,6 +11,7 @@ export const Container = styled.View`
 `;
 
 export const TextInput = styled.TextInput`
+   width: 80%;
    align-items: center;
    height: 40px;
    font-size: 20px;
@@ -21,5 +22,5 @@ export const TextInput = styled.TextInput`
 export const InputIcon = styled(Feather)`
    font-size: 20px;
    color: ${({ theme }) => theme.colors.placeholder};
-   margin-right: 10px;
+   margin-right: 20px;
 `;
