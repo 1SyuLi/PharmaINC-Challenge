@@ -6,6 +6,7 @@ import { Home } from '../screens/Home';
 import { CustomTabBarButton } from './CustomTabBarButton';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StackRoutes } from './stack.routes';
 const { Navigator, Screen } = createBottomTabNavigator();
 
 
@@ -32,7 +33,7 @@ export function TabRoutes() {
 
             <Screen
                 name="Home"
-                component={Home}
+                component={StackRoutes}
                 options={{
                     tabBarIcon: ({ color }) => (
                         <CustomTabBarButton name="home" size={40} color={color} />

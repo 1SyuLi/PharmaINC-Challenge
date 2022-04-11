@@ -1,4 +1,5 @@
 import React from 'react';
+import { TouchableOpacityProps } from 'react-native';
 
 import {
     Container,
@@ -13,7 +14,7 @@ import {
     UserDateBirth,
 } from './styles';
 
-interface UserProps {
+interface UserProps extends TouchableOpacityProps {
     user: {
         id: string;
         userPhoto: string;
@@ -25,9 +26,9 @@ interface UserProps {
     }
 }
 
-export function UserCard({ user }: UserProps) {
+export function UserCard({ user, ...rest }: UserProps) {
     return (
-        <Container>
+        <Container {...rest}>
             <Content>
                 <Avatar source={{ uri: user.userPhoto }} />
                 <UserInfo>

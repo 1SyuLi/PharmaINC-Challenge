@@ -20,6 +20,7 @@ import {
    FilterIcon,
    CardWrapper,
 } from './styles';
+import { useNavigation } from '@react-navigation/native';
 
 type UserProps = {
    id: string,
@@ -34,6 +35,7 @@ type UserProps = {
 export function Home() {
 
    const theme = useTheme();
+   const navigation = useNavigation<any>();
 
    const [users, setUsers] = useState<UserProps[]>([]);
    const [defaultUsers, setDefaultUsers] = useState(true);
@@ -68,6 +70,10 @@ export function Home() {
       })
    }
 
+   function handleUserInfo(user: UserProps) {
+      navigation.navigate('User', { user });
+   }
+
    useEffect(() => {
       async function loadDefaultUsers() {
          if (defaultUsers) {
@@ -93,7 +99,7 @@ export function Home() {
 
          <ScrollView>
             <CardWrapper>
-               {users.map(user => <UserCard key={user.id} user={user} />)}
+               {users.map(user => <UserCard onPress={() => handleUserInfo(user)} key={user.id} user={user} />)}
 
                {
                   !loading ?
