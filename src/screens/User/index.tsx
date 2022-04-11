@@ -35,12 +35,15 @@ export function User() {
                 <UserContent>
                     <Info>Email: <InfoContent>{userType.email}</InfoContent></Info>
                     <Info>Phone: <InfoContent>{userType.phone}</InfoContent></Info>
-                    <Info>Address: <InfoContent>rua 0</InfoContent></Info>
+                    <Info>Address: <InfoContent>{userType.address}</InfoContent></Info>
+                    <Info>Country: <InfoContent>{userType.country}</InfoContent></Info>
 
                     <UserWrapper>
                         <Info>{userType.gender}</Info>
                         <Info>{userType.dateBirth}</Info>
                     </UserWrapper>
+
+                    <Info>Username: <InfoContent>@{userType.username}</InfoContent></Info>
                 </UserContent>
             </UserContainer>
         </Container>

@@ -7,7 +7,7 @@ import {
     Avatar,
     UserInfo,
     UserName,
-    UserEmail,
+    UserCountry,
     UserPhone,
     ContentWrapper,
     UserGender,
@@ -16,13 +16,16 @@ import {
 
 interface UserProps extends TouchableOpacityProps {
     user: {
-        id: string;
-        userPhoto: string;
-        phone: string;
-        name: string;
-        email: string;
-        gender: string;
-        dateBirth: string;
+        id: string,
+        email: string,
+        gender: string,
+        phone: string,
+        name: string,
+        userPhoto: string,
+        dateBirth: string,
+        country: string,
+        address: string,
+        username: string,
     }
 }
 
@@ -33,7 +36,7 @@ export function UserCard({ user, ...rest }: UserProps) {
                 <Avatar source={{ uri: user.userPhoto }} />
                 <UserInfo>
                     <UserName>{user.name}</UserName>
-                    <UserEmail>{user.email}</UserEmail>
+                    <UserCountry>{user.country}</UserCountry>
                     <UserPhone>{user.phone}</UserPhone>
 
                     <ContentWrapper>

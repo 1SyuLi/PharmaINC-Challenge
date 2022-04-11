@@ -30,6 +30,9 @@ export type UserProps = {
    name: string,
    userPhoto: string,
    dateBirth: string,
+   country: string,
+   address: string,
+   username: string,
 }
 
 export function Home() {
@@ -46,19 +49,28 @@ export function Home() {
       await api.get('/?results=2').then(response => {
 
          const apiData = response.data.results;
+         // console.info(apiData);
 
          apiData.map(user => {
 
             const FormattedDate = format(parseISO(user.dob.date), 'MM-dd-yyyy');
+            const FormattedAddress = user.location.street.number + ' '
+               + user.location.street.name
+               + ', ' + user.location.state
+               + ' - ' + user.location.postcode;
+            const FullName = user.name.first + ' ' + user.name.last;
 
             const userFormatted: UserProps = {
                id: user.login.uuid,
                email: user.email,
                gender: user.gender,
                phone: user.phone,
-               name: user.name.first,
+               name: FullName,
                userPhoto: user.picture.large,
                dateBirth: FormattedDate,
+               username: user.login.username,
+               country: user.location.country,
+               address: FormattedAddress,
             }
 
             setUsers((oldUsers: any) => [...oldUsers, userFormatted]);
@@ -97,7 +109,7 @@ export function Home() {
             </InputWrapper>
          </Header>
 
-         <ScrollView>
+         <ScrollView showsVerticalScrollIndicator={false}>
             <CardWrapper>
                {users.map(user => <UserCard onPress={() => handleUserInfo(user)} key={user.id} user={user} />)}
 

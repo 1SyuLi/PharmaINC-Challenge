@@ -34,7 +34,7 @@ export const UserName = styled.Text`
    color: ${({ theme }) => theme.colors.primary};
 `;
 
-export const UserEmail = styled.Text`
+export const UserCountry = styled.Text`
    color: ${({ theme }) => theme.colors.placeholder};
    font-size: ${RFValue(14)}px;
    max-width: 200px;
