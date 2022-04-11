@@ -41,7 +41,7 @@ export const FilterIcon = styled(Feather)`
 `;
 
 export const CardWrapper = styled.View`
-   padding: 10px 24px;
+   padding: 10px 18px;
    margin-top: 10px;
    padding-bottom: 64px;
 `;
