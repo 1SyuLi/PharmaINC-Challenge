@@ -51,6 +51,7 @@ export function Home() {
    const [loading, setLoading] = useState(false);
    const [filter, setFilter] = useState('');
    const [focus, setFocus] = useState(false);
+   const [gender, setGender] = useState<'male' | 'female' | null>(null);
    const [modalVisible, setModalVisible] = useState(false);
 
    async function loadUsers() {
@@ -61,12 +62,14 @@ export function Home() {
 
          apiData.map(user => {
 
+            const FullName = user.name.first + ' ' + user.name.last;
             const FormattedDate = format(parseISO(user.dob.date), 'MM-dd-yyyy');
-            const FormattedAddress = user.location.street.number + ' '
+            const FormattedAddress = user.location.street.number
+               + ' '
                + user.location.street.name
                + ', ' + user.location.state
                + ' - ' + user.location.postcode;
-            const FullName = user.name.first + ' ' + user.name.last;
+
 
             const userFormatted: UserProps = {
                id: user.login.uuid,
@@ -106,6 +109,11 @@ export function Home() {
       setModalVisible(true);
    }
 
+   function filterGender(gender: 'male' | 'female' | null) {
+      setGender(gender);
+      setModalVisible(false);
+   }
+
    useEffect(() => {
       async function loadDefaultUsers() {
          if (defaultUsers) {
@@ -139,15 +147,26 @@ export function Home() {
          <ScrollView showsVerticalScrollIndicator={false}>
             <CardWrapper>
                {
-                  (filter.length > 0) ? users.map(user => {
-                     if (user.country.toLocaleLowerCase().includes(filter.toLocaleLowerCase())) {
-                        return <UserCard onPress={() => handleUserInfo(user)} key={user.id} user={user} />
-                     };
-                  }) : users.map(user => <UserCard onPress={() => handleUserInfo(user)} key={user.id} user={user} />)
+                  (filter.length > 0 || gender != null) ?
+                     users.map(user => {
+                        if (gender === null && filter.length > 0) {
+                           if (user.country.toLocaleLowerCase().includes(filter.toLocaleLowerCase())) {
+                              return <UserCard onPress={() => handleUserInfo(user)} key={user.id} user={user} />
+                           }
+                        }
+
+                        if (gender != null && user.gender === gender) {
+                           if (user.country.toLocaleLowerCase().includes(filter.toLocaleLowerCase())) {
+                              return <UserCard onPress={() => handleUserInfo(user)} key={user.id} user={user} />
+                           }
+                        }
+                     })
+                     :
+                     users.map(user => <UserCard onPress={() => handleUserInfo(user)} key={user.id} user={user} />)
                }
 
                {
-                  filter.length <= 0 &&
+                  (filter.length <= 0 && gender === null) &&
                   (
                      !loading ? <LoadMore onPress={loadUsers} /> :
                         <ActivityIndicator animating={true} size="large" color={theme.colors.logoDetail} />
@@ -163,8 +182,9 @@ export function Home() {
                   <CloseModalIcon name="x" />
                </TouchableOpacity>
 
-               <FilterButton title='Male' />
-               <FilterButton title='Female' />
+               <FilterButton title='Male' onPress={() => filterGender('male')} />
+               <FilterButton title='Female' onPress={() => filterGender('female')} />
+               <FilterButton title='All' onPress={() => filterGender(null)} />
             </ModalContainer>
          </Modal>
       </Container>

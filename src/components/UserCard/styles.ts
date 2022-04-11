@@ -55,6 +55,7 @@ export const ContentWrapper = styled.View`
 export const UserGender = styled.Text`
    color: ${({ theme }) => theme.colors.placeholder};
    font-size: ${RFValue(15)}px;
+   margin-right: 8px;
 `;
 
 export const UserDateBirth = styled.Text`
