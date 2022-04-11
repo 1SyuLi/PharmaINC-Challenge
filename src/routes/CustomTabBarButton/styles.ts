@@ -14,7 +14,7 @@ export const IconHome = styled.View`
   width: 70px;
   height: 70px;
   border-radius: 35px;
-  background-color: ${({ theme }) => theme.colors.logoDetail};
+  background-color: ${({ theme }) => theme.colors.placeholder};
   justify-content: center;
   align-items: center;
 `;

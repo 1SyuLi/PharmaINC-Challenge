@@ -22,7 +22,7 @@ import {
 } from './styles';
 import { useNavigation } from '@react-navigation/native';
 
-type UserProps = {
+export type UserProps = {
    id: string,
    email: string,
    gender: string,
