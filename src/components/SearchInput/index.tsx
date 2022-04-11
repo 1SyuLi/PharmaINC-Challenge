@@ -1,6 +1,6 @@
 import React from 'react';
-import { Feather } from '@expo/vector-icons';
 import { useTheme } from 'styled-components';
+import { TextInputProps } from 'react-native';
 
 import {
     Container,
@@ -8,13 +8,16 @@ import {
     InputIcon,
 } from './styles';
 
-export function SearchInput() {
+interface InputProps extends TextInputProps { };
+
+export function SearchInput({ ...rest }: InputProps) {
 
     const theme = useTheme();
 
     return (
         <Container>
             <TextInput
+                {...rest}
                 placeholder='Searching'
                 placeholderTextColor={theme.colors.placeholder}
                 autoCapitalize='none'

@@ -32,6 +32,7 @@ export const UserName = styled.Text`
    font-size: ${RFValue(20)}px;
    font-family: ${({ theme }) => theme.fonts.medium};
    color: ${({ theme }) => theme.colors.primary};
+   max-width: 200px;
 `;
 
 export const UserCountry = styled.Text`

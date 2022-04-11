@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, ScrollView, ActivityIndicator } from 'react-native';
+import { ScrollView, ActivityIndicator } from 'react-native';
 
 import { StatusBar } from 'react-native';
 import { useTheme } from 'styled-components';
@@ -11,6 +11,8 @@ import { LoadMore } from '../../components/LoadMore';
 import { api } from '../../services/api';
 import { format, parseISO } from 'date-fns';
 
+import { useNavigation } from '@react-navigation/native';
+
 import {
    Container,
    Header,
@@ -20,7 +22,6 @@ import {
    FilterIcon,
    CardWrapper,
 } from './styles';
-import { useNavigation } from '@react-navigation/native';
 
 export type UserProps = {
    id: string,
@@ -43,13 +44,14 @@ export function Home() {
    const [users, setUsers] = useState<UserProps[]>([]);
    const [defaultUsers, setDefaultUsers] = useState(true);
    const [loading, setLoading] = useState(false);
+   const [filter, setFilter] = useState('');
+   const [focus, setFocus] = useState(false);
 
    async function loadUsers() {
       setLoading(true);
       await api.get('/?results=2').then(response => {
 
          const apiData = response.data.results;
-         // console.info(apiData);
 
          apiData.map(user => {
 
@@ -80,10 +82,14 @@ export function Home() {
       }).catch(err => {
          console.log(err);
       })
-   }
+   };
 
    function handleUserInfo(user: UserProps) {
       navigation.navigate('User', { user });
+   };
+
+   function handleFocus() {
+      setFocus(!focus);
    }
 
    useEffect(() => {
@@ -94,7 +100,7 @@ export function Home() {
          }
       }
       loadDefaultUsers();
-   }, [])
+   }, []);
 
    return (
       <Container>
@@ -104,19 +110,32 @@ export function Home() {
             <Title>Pharma <Detail>INC</Detail></Title>
 
             <InputWrapper>
-               <SearchInput />
+               <SearchInput
+                  onChangeText={setFilter}
+                  value={filter}
+                  onFocus={handleFocus}
+                  onBlur={handleFocus}
+               />
                <FilterIcon name='filter' />
             </InputWrapper>
          </Header>
 
          <ScrollView showsVerticalScrollIndicator={false}>
             <CardWrapper>
-               {users.map(user => <UserCard onPress={() => handleUserInfo(user)} key={user.id} user={user} />)}
+               {
+                  (focus || filter.length > 0) ? users.map(user => {
+                     if (user.country.toLocaleLowerCase().includes(filter.toLocaleLowerCase())) {
+                        return <UserCard onPress={() => handleUserInfo(user)} key={user.id} user={user} />
+                     };
+                  }) : users.map(user => <UserCard onPress={() => handleUserInfo(user)} key={user.id} user={user} />)
+               }
 
                {
-                  !loading ?
-                     <LoadMore onPress={loadUsers} />
-                     : <ActivityIndicator animating={true} size="large" color={theme.colors.logoDetail} />
+                  filter.length <= 0 &&
+                  (
+                     !loading ? <LoadMore onPress={loadUsers} /> :
+                        <ActivityIndicator animating={true} size="large" color={theme.colors.logoDetail} />
+                  )
                }
 
             </CardWrapper>
