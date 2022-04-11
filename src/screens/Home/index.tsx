@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, ScrollView } from 'react-native';
+import { FlatList, ScrollView, ActivityIndicator } from 'react-native';
 
 import { StatusBar } from 'react-native';
 import { useTheme } from 'styled-components';
@@ -9,6 +9,7 @@ import { UserCard } from '../../components/UserCard';
 import { LoadMore } from '../../components/LoadMore';
 
 import { api } from '../../services/api';
+import { format, parseISO } from 'date-fns';
 
 import {
    Container,
@@ -36,14 +37,18 @@ export function Home() {
 
    const [users, setUsers] = useState<UserProps[]>([]);
    const [defaultUsers, setDefaultUsers] = useState(true);
+   const [loading, setLoading] = useState(false);
 
    async function loadUsers() {
+      setLoading(true);
       await api.get('/?results=2').then(response => {
 
          const apiData = response.data.results;
 
-
          apiData.map(user => {
+
+            const FormattedDate = format(parseISO(user.dob.date), 'MM-dd-yyyy');
+
             const userFormatted: UserProps = {
                id: user.login.uuid,
                email: user.email,
@@ -51,16 +56,17 @@ export function Home() {
                phone: user.phone,
                name: user.name.first,
                userPhoto: user.picture.large,
-               dateBirth: '00/00/2000',
+               dateBirth: FormattedDate,
             }
 
             setUsers((oldUsers: any) => [...oldUsers, userFormatted]);
          });
+
+         setLoading(false);
       }).catch(err => {
          console.log(err);
       })
    }
-
 
    useEffect(() => {
       async function loadDefaultUsers() {
@@ -89,11 +95,14 @@ export function Home() {
             <CardWrapper>
                {users.map(user => <UserCard key={user.id} user={user} />)}
 
-               <LoadMore onPress={loadUsers} />
+               {
+                  !loading ?
+                     <LoadMore onPress={loadUsers} />
+                     : <ActivityIndicator animating={true} size="large" color={theme.colors.logoDetail} />
+               }
+
             </CardWrapper>
          </ScrollView>
-
-
       </Container>
    );
 }
