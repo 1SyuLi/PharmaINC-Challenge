@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, ActivityIndicator } from 'react-native';
+import { ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
+
+import Modal from 'react-native-modal';
 
 import { StatusBar } from 'react-native';
 import { useTheme } from 'styled-components';
@@ -21,7 +23,10 @@ import {
    InputWrapper,
    FilterIcon,
    CardWrapper,
+   ModalContainer,
+   CloseModalIcon,
 } from './styles';
+import { FilterButton } from '../../components/FilterButton';
 
 export type UserProps = {
    id: string,
@@ -46,6 +51,7 @@ export function Home() {
    const [loading, setLoading] = useState(false);
    const [filter, setFilter] = useState('');
    const [focus, setFocus] = useState(false);
+   const [modalVisible, setModalVisible] = useState(false);
 
    async function loadUsers() {
       setLoading(true);
@@ -92,6 +98,14 @@ export function Home() {
       setFocus(!focus);
    }
 
+   function closeModal() {
+      setModalVisible(false);
+   }
+
+   function openModal() {
+      setModalVisible(true);
+   }
+
    useEffect(() => {
       async function loadDefaultUsers() {
          if (defaultUsers) {
@@ -116,14 +130,16 @@ export function Home() {
                   onFocus={handleFocus}
                   onBlur={handleFocus}
                />
-               <FilterIcon name='filter' />
+               <TouchableOpacity onPress={openModal}>
+                  <FilterIcon name='filter' />
+               </TouchableOpacity>
             </InputWrapper>
          </Header>
 
          <ScrollView showsVerticalScrollIndicator={false}>
             <CardWrapper>
                {
-                  (focus || filter.length > 0) ? users.map(user => {
+                  (filter.length > 0) ? users.map(user => {
                      if (user.country.toLocaleLowerCase().includes(filter.toLocaleLowerCase())) {
                         return <UserCard onPress={() => handleUserInfo(user)} key={user.id} user={user} />
                      };
@@ -140,6 +156,17 @@ export function Home() {
 
             </CardWrapper>
          </ScrollView>
+
+         <Modal isVisible={modalVisible}>
+            <ModalContainer>
+               <TouchableOpacity onPress={closeModal}>
+                  <CloseModalIcon name="x" />
+               </TouchableOpacity>
+
+               <FilterButton title='Male' />
+               <FilterButton title='Female' />
+            </ModalContainer>
+         </Modal>
       </Container>
    );
 }
