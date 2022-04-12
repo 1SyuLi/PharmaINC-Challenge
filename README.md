@@ -44,6 +44,12 @@ expo start
 5. Abra o aplicativo no emulador ou celular
 <img src="https://i.ibb.co/HCBtzNg/expo.png" alt="expo" border="0">
 
+# App
+<a href="https://www.youtube.com/watch?v=6JfvWUXhS7Y">
+ <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="expo" border="0">
+</a>
+ 
+
 ## Página do desafio
 ### https://lab.coodesh.com/public-challenges/mobile-challenge-2021
 
