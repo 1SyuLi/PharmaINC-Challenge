@@ -10,6 +10,11 @@ O seu objetivo nesse projeto, é trabalhar no desenvolvimento da Aplicação end
  <img  align="center" alt="ReactNative" src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
  <img  align="center" alt="TypeScript" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"/>
  <img  align="center" alt="Styled-Components" src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/>
+ 
+ ### Diferenciais
+- [x] Adicionar um filtro por Gênero na tabela
+- [x] Configurar o buscador para poder filtrar por nacionalidade
+- [ ] Escrever Unit Tests na Lista de Pacientes. Escolher a melhor abordagem e biblioteca
 
 ## Instruções
 ### Pre requesitos
