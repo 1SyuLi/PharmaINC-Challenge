@@ -1,116 +1,49 @@
 # Mobile Challenge 🏅 2021
+## Pharma INC 
 
-## Introdução
-
-Este é um desafio para testar seus conhecimentos de Mobile;
-
-O objetivo é avaliar a sua forma de estruturação e autonomia em decisões para construir algo escalável utilizando um framework moderno.
-
-Você está livre para usar **Android Kotlin** ou **Swift iOS** ou **Flutter** ou **React Native** ou **Ionic** no desenvolvimento da solução deste tech challenge.
-
-[SPOILER] As instruções de entrega e apresentação do challenge estão no final deste Readme (=
-
-## Case
+#### Case
 
 A empresa Pharma Inc, está trabalhando em um projeto em colaboração com sua base de clientes para facilitar a gestão e visualização da informação dos seus pacientes de maneira simples e objetiva em uma aplicação onde podem listar, filtrar e expandir os dados disponíveis.
 O seu objetivo nesse projeto, é trabalhar no desenvolvimento da Aplicação end que consumirá a API da empresa Pharma Inc seguindo os requisitos propostos neste desafio.
 
-## Recursos
+## Tecnologias utilizadas
+ <img  align="center" alt="ReactNative" src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
+ <img  align="center" alt="TypeScript" src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"/>
+ <img  align="center" alt="Styled-Components" src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/>
 
-1. Estudar a documentação da REST API: https://randomuser.me/documentation
-2. Trabalhar em um [FORK](https://lab.coodesh.com/help/gitlab-basics/fork-project.md) deste repositório em seu usuário ou utilizar um repositório em seu github pessoal (não esqueça de colocar no readme a referência a este challenge);
-3. Logo da Marca: [Pharma Inc](assets/logo.png)
-4. Cores para trabalhar no Projeto: [UI Colors](assets/colors.png)
-5. [Wireframe](assets/screens.png) com as 3 telas principais.
+## Instruções
+### Pre requesitos
 
-## Lista de Pacientes
+- <img  align="center" alt="Node" src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white"/> Siga os passos da instalação no <a href="https://nodejs.org/en/download/">site oficial</a>
 
-A tela inicial do projeto será um lista de pacientes que deverá conter um buscador para facilitar filtrar todos os que são exibidos na lista, proposta:
+- <img  align="center" alt="Expo" src="https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?style=flat-square&logo=EXPO&labelColor=f3f3f3&logoColor=000"/> Siga os passos da instalação no <a href="https://docs.expo.dev/workflow/expo-cli/">site oficial</a>
 
-![List users](assets/list.png)
-
-Para obter os dados, utilizaremos a API do Random User:
-
-- https://randomuser.me/api/
-
-Exemplo da resposta:
-
-```json
-{
-   "results": [
-       {
-           "gender": "female",
-           "name": {
-               "title": "Ms",
-               "first": "Alea",
-               "last": "Christoffersen"
-           }
-       }
-   ],
-   "info": {
-       "seed": "2f10116f1799d353",
-       "results": 1,
-       "page": 1,
-       "version": "1.3"
-   }
-}
+- Yarn
+```bash
+npm install --global yarn
 ```
 
-Além de realizar a request, devemos aplicar alguns filtros na API:
+### Instalação
+1. Clone o repositório
+```bash
+git clone https://github.com/1SyuLi/PharmaINC-Challenge.git
+```
+2. Acesse a pasta do projeto
+```bash
+cd PharmaINC
+```
+3. Instale as dependências necessárias do App
+```bash
+yarn
+```
+4. Inicie o app com Expo
+```bash
+expo start
+```
 
-- Limitar em 50 resultados por request
-- Utilizar o `Loading more` para indicar que estamos carregando mais dados da API
+5. Abra o aplicativo no emulador ou celular
+<img src="https://i.ibb.co/HCBtzNg/expo.png" alt="expo" border="0">
 
-### Visualizar paciente
-
-Para expandir a informação dos pacientes, teremos que adicionar o card como clicavél. Seguir o modelo proposto para o modal:
-
-![View user](assets/modal.png)
-
-Devemos exibir os seguintes campos do paciente:
-
-- Imagem
-- Nome completo
-- Email
-- Gênero
-- Data de nascimento
-- Telefone
-- Nacionalidade
-- Endereço
-- ID (Número de identificação)
-
-## Extras
-
-Além do desafio proposto com as duas telas, temos alguns diferenciais:
-
-- **Diferencial 1** Adicionar um filtro por Gênero na tabela;
-- **Diferencial 2** Configurar o buscador para poder filtrar por nacionalidade;
-- **Diferencial 3** Escrever Unit Tests na Lista de Pacientes. Escolher a melhor abordagem e biblioteca;
-
-## Readme do Repositório
-
-- Deve conter o título do projeto
-- Uma descrição sobre o projeto em frase
-- Deve conter uma lista com linguagem, framework e/ou tecnologias usadas
-- Como instalar e usar o projeto (instruções)
-- Não esqueça o [.gitignore](https://www.toptal.com/developers/gitignore)
-- Se está usando github pessoal, referencie que é um challenge by coodesh
-
-## Finalização e Instruções para a Apresentação
-
-Avisar sobre a finalização e enviar para correção.
-
-1. Confira se você respondeu o Scorecard da Vaga que chegou no seu email;
-2. Confira se você respondeu o Mapeamento Comportamental que chegou no seu email;
-3. Acesse: [https://coodesh.com/challenges/review](https://coodesh.com/challenges/review);
-4. Adicione o repositório com a sua solução;
-5. Grave um vídeo, utilizando o botão na tela de solicitar revisão da Coodesh, com no máximo 5 minutos, com a apresentação do seu projeto. Foque em pontos obrigatórios e diferenciais quando for apresentar.
-6. Adicione o link da apresentação do seu projeto no README.md.
-7. Verifique se o Readme está bom e faça o commit final em seu repositório;
-8. Confira a vaga desejada;
-9. Envie e aguarde as instruções para seguir no processo. Sucesso e boa sorte. =)
-
-## Suporte
-
-Use o nosso canal no slack: http://bit.ly/32CuOMy para tirar dúvidas sobre o processo ou envie um e-mail para contato@coodesh.com.
+## Página do desafio
+### https://lab.coodesh.com/public-challenges/mobile-challenge-2021
 
